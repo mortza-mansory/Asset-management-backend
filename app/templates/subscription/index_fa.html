@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خرید اشتراک - سامانه مدیریت اموال</title>
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>خرید اشتراک سامانه</h1>
+            <p>مدیریت هوشمند اموال با فناوری RFID</p>
+        </header>
+        
+        <div class="plans">
+            <div class="plan-card" data-plan="6month">
+                <h2>اشتراک ۶ ماهه</h2>
+                <div class="price">۳,۰۰۰,۰۰۰ تومان</div>
+                <ul>
+                    <li>پشتیبانی ۲۴/۷</li>
+                    <li>مدیریت تا ۱۰۰۰۰ دارایی</li>
+                </ul>
+                <button class="select-btn">انتخاب</button>
+            </div>
+            
+            <div class="plan-card popular" data-plan="yearly">
+                <div class="popular-badge">پیشنهاد ویژه</div>
+                <h2>اشتراک سالانه</h2>
+                <div class="price">۶,۰۰۰,۰۰۰ تومان</div>
+                <ul>
+                    <li>پشتیبانی VIP</li>
+                    <li>مدیریت تا ۵۰۰۰ دارایی</li>
+                    <li>گزارش‌گیری پیشرفته</li>
+                </ul>
+                <button class="select-btn">انتخاب</button>
+            </div>
+            
+            <div class="plan-card" data-plan="unlimited">
+                <h2>اشتراک نامحدود</h2>
+                <div class="price">۲۰,۰۰۰,۰۰۰ تومان</div>
+                <ul>
+                    <li>پشتیبانی اختصاصی</li>
+                    <li>دارایی‌های نامحدود</li>
+                    <li>همه امکانات پریمیوم</li>
+                </ul>
+                <button class="select-btn">انتخاب</button>
+            </div>
+        </div>
+        
+        <div id="paymentModal" class="modal">
+            <div class="modal-content">
+                <span class="close">×</span>
+                <h2>تکمیل فرآیند پرداخت</h2>
+                <div id="paymentForm">
+                    <div id="paymentGateway">
+                        <p>در حال انتقال به درگاه پرداخت...</p>
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const paymentId = "{{ payment_id }}";
+        const token = "{{ token }}";
+    </script>
+    <script src="/static/script.js"></script>
+</body>
+</html>

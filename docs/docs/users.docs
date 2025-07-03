@@ -1,0 +1,175 @@
+مستندات فیچر Users:
+پایه URL: https://api.example.com/api/v1/users
+
+۲.۱. ایجاد کاربر جدید
+json
+{
+  "endpoint": "/",
+  "method": "POST",
+  "description": "ایجاد کاربر جدید توسط ادمین",
+  "authentication": "Bearer Token",
+  "request": {
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer <token>"
+    },
+    "body": {
+      "username": "string (required)",
+      "email": "string (optional)",
+      "phone_num": "string (optional)",
+      "password": "string (required)",
+      "role": "string (A1|A2|O)",
+      "company_id": "number (required for A2,O)"
+    }
+  },
+  "response": {
+    "success": {
+      "status": 201,
+      "body": {
+        "id": "number",
+        "username": "string",
+        "role": "string",
+        "company_id": "number"
+      }
+    },
+    "error": {
+      "status": 403,
+      "body": {
+        "detail": "Permission denied"
+      }
+    }
+  }
+}
+۲.۲. دریافت لیست کاربران
+json
+{
+  "endpoint": "/",
+  "method": "GET",
+  "description": "دریافت لیست کاربران با صفحه‌بندی",
+  "authentication": "Bearer Token",
+  "query_params": {
+    "page": "number (default: 1)",
+    "per_page": "number (default: 20)",
+    "company_id": "number (optional)"
+  },
+  "response": {
+    "success": {
+      "status": 200,
+      "body": {
+        "data": [
+          {
+            "id": "number",
+            "username": "string",
+            "role": "string",
+            "company_id": "number"
+          }
+        ],
+        "pagination": {
+          "total": "number",
+          "page": "number",
+          "per_page": "number"
+        }
+      }
+    }
+  }
+}
+۲.۳. به‌روزرسانی کاربر
+json
+{
+  "endpoint": "/{user_id}",
+  "method": "PUT",
+  "description": "به‌روزرسانی اطلاعات کاربر",
+  "authentication": "Bearer Token",
+  "request": {
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer <token>"
+    },
+    "body": {
+      "username": "string (optional)",
+      "email": "string (optional)",
+      "role": "string (optional)",
+      "is_active": "boolean (optional)"
+    }
+  },
+  "response": {
+    "success": {
+      "status": 200,
+      "body": {
+        "id": "number",
+        "username": "string",
+        "role": "string",
+        "is_active": "boolean"
+      }
+    },
+    "error": {
+      "status": 403,
+      "body": {
+        "detail": "Cannot update higher role users"
+      }
+    }
+  }
+}
+۳. مستندات مدیریت سازمان‌ها:
+۳.۱. ایجاد سازمان جدید
+json
+{
+  "endpoint": "/companies",
+  "method": "POST",
+  "description": "ایجاد سازمان جدید (فقط SuperAdmin)",
+  "authentication": "Bearer Token",
+  "request": {
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer <token>"
+    },
+    "body": {
+      "name": "string (required)",
+      "government_admin_id": "number (optional)"
+    }
+  },
+  "response": {
+    "success": {
+      "status": 201,
+      "body": {
+        "id": "number",
+        "name": "string",
+        "admin_id": "number"
+      }
+    }
+  }
+}
+۴. نمونه پاسخ‌های خطا (عمومی):
+json
+{
+  "error_responses": [
+    {
+      "status": 400,
+      "body": {
+        "detail": "Validation error",
+        "errors": {
+          "username": "Already taken",
+          "email": "Invalid format"
+        }
+      }
+    },
+    {
+      "status": 401,
+      "body": {
+        "detail": "Unauthorized"
+      }
+    },
+    {
+      "status": 403,
+      "body": {
+        "detail": "Forbidden: Insufficient permissions"
+      }
+    },
+    {
+      "status": 404,
+      "body": {
+        "detail": "User not found"
+      }
+    }
+  ]
+}

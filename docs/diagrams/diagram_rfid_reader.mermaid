@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant F as Flutter
+    participant B as Backend
+    participant R as RFID Reader
+    participant D as Database
+    
+    F->>B: درخواست اسکن
+    B->>R: دستور خواندن
+    R-->>B: داده تگ
+    B->>D: جستجوی دارایی
+    D-->>B: اطلاعات دارایی
+    B-->>F: نمایش اطلاعات

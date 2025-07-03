@@ -1,0 +1,7 @@
+stateDiagram-v2
+    [*] --> Guest
+    Guest --> Authenticated: Login
+    Authenticated --> ActiveUser: Verified
+    ActiveUser --> Suspended: 10 Failed Attempts
+    Suspended --> ActiveUser: Admin Unlock
+    Authenticated --> Guest: Logout

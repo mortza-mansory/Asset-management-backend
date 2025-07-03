@@ -1,0 +1,10 @@
+flowchart TD
+    A[Core] --> B[Security]
+    A --> C[Models]
+    A --> D[Validators]
+    B --> E[JWT Auth]
+    B --> F[Password Hash]
+    C --> G[UserRules]
+    C --> H[Company]
+    D --> I[RoleValidator]
+    D --> J[OrgValidator]

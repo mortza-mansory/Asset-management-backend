@@ -1,0 +1,105 @@
+مستندات API به صورت JSON (برای Auth و Users)
+۱. مستندات فیچر Auth:
+پایه URL: https://api.example.com/api/v1/auth
+
+۱.۱. لاگین کاربر
+json```
+{
+  "endpoint": "/login",
+  "method": "POST",
+  "description": "احراز هویت کاربر و دریافت توکن دسترسی",
+  "request": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "username": "string (required)",
+      "password": "string (required)"
+    }
+  },
+  "response": {
+    "success": {
+      "status": 200,
+      "body": {
+        "access_token": "string",
+        "token_type": "bearer",
+        "expires_in": 14400
+      }
+    },
+    "error": {
+      "status": 401,
+      "body": {
+        "detail": "Invalid credentials"
+      }
+    }
+  }
+}
+```
+۱.۲. ثبت‌نام کاربر جدید
+json```
+{
+  "endpoint": "/signup",
+  "method": "POST",
+  "description": "ثبت کاربر جدید و ایجاد سازمان",
+  "request": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "username": "string (required)",
+      "email": "string (optional)",
+      "phone_num": "string (optional)",
+      "password": "string (required)",
+      "company_name": "string (required)"
+    }
+  },
+  "response": {
+    "success": {
+      "status": 201,
+      "body": {
+        "id": "number",
+        "username": "string",
+        "role": "A1",
+        "company_id": "number"
+      }
+    },
+    "error": {
+      "status": 400,
+      "body": {
+        "detail": "Username already exists"
+      }
+    }
+  }
+}
+```
+۱.۳. بازیابی رمز عبور
+json```
+{
+  "endpoint": "/forgot-password",
+  "method": "POST",
+  "description": "دریافت کد یکبارمصرف برای بازیابی رمز",
+  "request": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "email": "string (required)"
+    }
+  },
+  "response": {
+    "success": {
+      "status": 200,
+      "body": {
+        "message": "OTP sent successfully",
+        "expires_at": "2023-11-20T15:30:00Z"
+      }
+    },
+    "error": {
+      "status": 404,
+      "body": {
+        "detail": "User not found"
+      }
+    }
+  }
+}
+```

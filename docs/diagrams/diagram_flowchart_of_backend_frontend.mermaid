@@ -1,0 +1,17 @@
+flowchart TB
+    subgraph Frontend
+        A[Login] --> B[Dashboard]
+        B --> C[Asset Management]
+        B --> D[User Management]
+    end
+    
+    subgraph Backend
+        E[Auth] --> F[Users]
+        E --> G[Assets]
+        F --> H[Database]
+        G --> H
+    end
+    
+    A --> E
+    C --> G
+    D --> F
